@@ -1,0 +1,9 @@
+# 忽略 Python 編譯產生的檔案
+*.pyc
+__pycache__/
+
+# 忽略影片檔案
+*.mp4
+
+# 忽略所有含有 cpython 的檔案或資料夾
+*cpython*
