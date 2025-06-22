@@ -64,6 +64,15 @@ def append_history(filename, result):
 
 POSE_API_URL = "https://mmpose-api-924124779607.us-central1.run.app/pose_video"
 
+# 新增一個健康檢查路由
+@app.get("/health")
+async def health_check():
+    """
+    健康檢查端點，用於測試伺服器是否正常運行。
+    返回一個簡單的狀態訊息。
+    """
+    return JSONResponse(content={"status": "ok", "message": "Server is running"})
+
 @app.post("/upload")
 async def upload(file: UploadFile = File(...)):
     extension = os.path.splitext(file.filename)[1]
