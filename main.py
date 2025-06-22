@@ -4,7 +4,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 import uuid, os, shutil, json
 import requests
-
+import warnings 
+warnings.filterwarnings('ignore')
 # 從新的檔案導入影片處理函數
 from pose_renderer import render_video_with_pose # 確保 pose_renderer.py 在同一個目錄下
 

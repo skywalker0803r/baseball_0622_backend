@@ -2,7 +2,8 @@ import cv2
 import numpy as np
 import os
 import uuid
-
+import warnings 
+warnings.filterwarnings('ignore')
 # COCO 關鍵點定義 (17 個點的順序)
 COCO_KEYPOINTS = [
     "nose", "left_eye", "right_eye", "left_ear", "right_ear",
