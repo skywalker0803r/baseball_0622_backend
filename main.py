@@ -77,13 +77,17 @@ async def upload(file: UploadFile = File(...)):
     try:
         # 以二進制模式讀取已保存的影片檔案以進行 POST 請求
         with open(original_save_path, "rb") as video_file_data:
-            files = {'video': (file.filename, video_file_data, 'video/mp4')}
+            # 將 'video' 鍵改為 'file'，這是常見的 API 期望的檔案欄位名稱
+            files = {'file': (file.filename, video_file_data, 'video/mp4')}
             response = requests.post(POSE_API_URL, files=files, timeout=300) # 5 分鐘超時
             response.raise_for_status()
             pose_api_response = response.json()
             print(f"Pose API Response: {pose_api_response}")
     except requests.exceptions.RequestException as e:
         print(f"Error calling pose API: {e}")
+        # 如果有回應內容，打印出來以獲取更多錯誤信息
+        if hasattr(e, 'response') and e.response is not None:
+            print(f"API Response Content: {e.response.text}")
         pose_api_response = {"error": True, "message": f"Failed to get pose data from external API: {e}"}
     except json.JSONDecodeError as e:
         print(f"Error decoding JSON from pose API: {e}")
